@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "List";
+
+}
+
+<div class="row">
+
+    <div class="col-md-3">
+        @Html.Action("CategoriesMenu")
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+        @Html.Partial("_ProductList")
+    </div>
+
+</div>
+
+

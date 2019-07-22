@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title - SupleSklep</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            @Html.ActionLink("SupleSklep Corporation", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                    @Html.Action("NavbarMenu", "Home")
+
+                </ul>
+                @Html.Action("NavbarMenu", "Cart")
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+
+        @*<footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>*@
+
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3">
+
+                        <h3 class="text-center">Konto</h3>
+
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a href="@Url.Action("OrderHistory","Profile")" class="nav-link"><i class="fa fa-bars"></i> Moje zamówienia</a></li>
+                            <li class="nav-item"><a href="@Url.Action("UserDetails","Profile")" class="nav-link"><i class="fa fa-address-card-o"></i> Mój adres</a></li>
+                            <li class="nav-item"><a href="@Url.Action("Index","Profile")" class="nav-link"><i class="fa fa-user-circle-o"></i> Moje konto</a></li>
+
+
+                        </ul>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3">
+
+                        <h3 class="text-center">Zakupy</h3>
+
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a href="@Url.Action("Shipment","Home")" class="nav-link active"><i class="fa fa-cubes"></i> Koszty dostawy </a></li>
+                            <li class="nav-item"><a href="@Url.Action("Payment","Home")" class="nav-link"><i class="fa fa-credit-card-alt"></i> Formy płatności </a></li>
+                            <li class="nav-item"><a href="@Url.Action("Complaint","Home")" class="nav-link"><i class="fa fa-reply"></i> Reklamacje i zwroty</a></li>
+                            <li class="nav-item"><a href="@Url.Action("Faq","Home")" class="nav-link active"><i class="fa fa-question-circle-o"></i> FAQ</a></li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3">
+
+                        <h3 class="text-center">Informacje</h3>
+
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a href="@Url.Action("About","Home")" class="nav-link"><i class="fa fa-info-circle"></i> O firmie </a></li>
+                            <li class="nav-item"><a href="@Url.Action("Regulations","Home")" class="nav-link"><i class="fa fa-gavel"></i> Regulamin sklepu </a></li>
+                            <li class="nav-item"><a href="@Url.Action("Contact","Home")" class="nav-link"><i class="fa fa-comment"></i> Kontakt</a></li>
+                            <li class="nav-item"><a href="@Url.Action("Safety","Home")" class="nav-link"><i class="fa fa-shield"></i> Bezpieczeństwo</a></li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3">
+
+
+                        <h3 class="text-center">Kontakt</h3>
+
+                        <div class="text-center">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <p>
+                                        <b>Infolinia: </b>
+                                        <b style="color:#ff0000;">(8:00-16:00):</b>  +48813089009
+                                    </p>
+                                </li>
+
+                                <li class="nav-item">
+                                    <p>
+                                        <a href="https://www.facebook.com/martut2762"><i class="fa fa-facebook-square fa-3x"></i></a>
+                                        <a href="https://www.facebook.com/martut2762"><i class="fa fa-google-plus-square fa-3x"></i></a>
+                                        <a href="mailto:info@suplesklep.pl"><i class="fa fa-envelope-square fa-3x"></i></a>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <div class="float-left">
+                            © 2017, SupleSklep, All rights reserved
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <div class="float-right">
+                            <a target="_blank" href="https://www.facebook.com/martut2762">Web Design & Development by Marcin Wirzeski</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+
+
+
+
+
+
+
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

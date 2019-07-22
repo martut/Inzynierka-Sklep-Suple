@@ -1,0 +1,116 @@
+﻿@model InzSklep.ViewModel.CartViewModel
+@using InzSklep.Infrastructure
+@{
+    ViewBag.Title = "Index";
+}
+
+<section>
+    <p class="display-4 text-center">Koszyk</p>
+    <table class="table table-responsive-my table-hover ">
+        <thead>
+            <tr>
+                <th>Produkt:</th>
+                <th></th>
+                <th>Ilość:</th>
+                <th>Cena:</th>
+                <th>Razem:</th>
+                <th>Usuń</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @foreach (var cartItem in Model.CartItem)
+            {
+
+                <tr>
+
+                    <td class="test">
+                        <a class="test" href="@Url.Action("Details", "Store", new { id = cartItem.Product.ProductId })">
+                            <img class="rounded img-fluid test" src="@Url.Content(Url.ProductIMGFolderPath(cartItem.Product.ProductFileName))" />
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Details", "Store", new { id = cartItem.Product.ProductId })">
+                            <h5>
+                                @cartItem.Product.Name
+                            </h5>
+                        </a>
+                    </td>
+                    <td>
+
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a class="btn btn-danger" href="@Url.Action("RemoveFromCart", "Cart", new { id = cartItem.Product.ProductId, count = 1, backAction = "index" })"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+                            <a href="#" class="btn btn-light disabled btn-block px-4" role="button" aria-disabled="true">@cartItem.Quantity</a>
+                            <a class="btn btn-primary" href="@Url.Action("AddToCart", "Cart", new { id = cartItem.Product.ProductId })"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+
+                        </div>
+
+
+                        @*<a class="btn btn-primary" href="@Url.Action("AddToCart", "Cart", new { id = cartItem.Product.ProductId })"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+                            <h5>
+                                <span id="cart-item-count-@cartItem.Product.ProductId">
+
+                                    @cartItem.Quantity
+
+                                </span>
+                            </h5>
+
+                            <div>
+                                <a class="btn btn-danger" href="@Url.Action("RemoveFromCart", "Cart", new { id = cartItem.Product.ProductId })"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+                            </div>*@
+                    </td>
+                    <td>
+                        <h5>
+                            @String.Format("{0:0.##}", cartItem.TotalPrice) zł
+                        </h5>
+                    </td>
+                    <td>
+                        <h5>
+                            @String.Format("{0:0.##}", (cartItem.TotalPrice * cartItem.Quantity)) zł
+                        </h5>
+                    </td>
+                    <td>
+                        <a class="" href="@Url.Action("RemoveFromCart", "Cart", new { id = cartItem.Product.ProductId, count = cartItem.Quantity, backAction = "index"})"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+        @if (Model.CartItem?.Count == 0)
+        {
+            <tr>
+                <td class="text-center">
+                    Twój koszyk jest pusty. Może dodasz coś do niego?
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="row mb-5">
+        <div class="col-md-12 pb-2">
+            <h4 class="pull-right">
+                Wartość zakupów: <span id="total-price-value">@String.Format("{0:0.##}", Model.TotalPrice)</span> zł
+            </h4>
+        </div>
+
+        <div class="col-md-12">
+            <div class="pull-right">
+                <a class="btn btn-primary " href="@Url.Action("Index","Home")" role="button"><h5>Kontynuuj zakupy</h5></a>
+
+                @if (Model.TotalPrice > 0)
+            {
+                    <a class="btn btn-success col-md-offset-1" href="@Url.Action("Checkout","Cart")" role="button"><h5>Zamów</h5></a>
+
+                }
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+</section>

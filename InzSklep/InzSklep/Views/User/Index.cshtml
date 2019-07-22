@@ -1,0 +1,39 @@
+﻿@model IEnumerable<InzSklep.ViewModel.UserViewModel>
+
+@{
+    ViewBag.Title = "Lista użytkowników";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container body-content" style="margin-top: 25px;">
+    <h3>Lista użytkowników</h3>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.user.Email)
+            </th>
+            <th>
+                Rola
+            </th>
+            <th>Zarządzaj</th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user.Email)
+                </td>
+                <td>
+                    @item.role
+                </td>
+                <td>@Html.ActionLink("Zarządzaj", "Permissions", new { id = @item.user.Id }) </td>
+
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,0 +1,97 @@
+﻿@model InzSklep.ViewModel.CartViewModel
+@using InzSklep.Infrastructure
+<ul class="navbar-nav">
+    <li class="nav-item">
+
+        <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModalLong">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i> @Model.CartItem.Count 
+        </a>
+
+
+
+
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Koszyk</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-responsive-my table-hover ">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Produkt:</th>
+                                    <th>Ilość:</th>
+                                    <th>Cena:</th>
+                                    
+                                    <th>Usuń</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @foreach (var cartItem in Model.CartItem)
+            {
+
+                                    <tr>
+
+                                     
+                                        <td>
+                                            <a href="@Url.Action("Details", "Store", new { id = cartItem.Product.ProductId })">
+                                                <h6>
+                                                    @cartItem.Product.Name
+                                                </h6>
+                                            </a>
+                                        </td>
+                                        <td>
+
+                                            <h6>
+                                                @cartItem.Quantity
+                                            </h6>
+
+
+
+                                        </td>
+                                        
+                                        <td>
+                                            <h6>
+                                                @String.Format("{0:0.##}", (cartItem.TotalPrice * cartItem.Quantity)) zł
+                                            </h6>
+                                        </td>
+                                        <td>
+                                            <a class="" href="@Url.Action("RemoveFromCart", "Cart", new { id = cartItem.Product.ProductId, count = cartItem.Quantity, backAction = "index" })"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                            @if (Model.CartItem?.Count == 0)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        Twój koszyk jest pusty. Może dodasz coś do niego?
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                        <a href="@Url.Action("Index","Cart")" class="btn btn-primary">Dokończ zakupy</a>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </li>
+</ul>

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<InzSklep.Models.Product>
+
+@{
+    ViewBag.Title = "Produkty";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Dodaj", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Producer.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.AddedDate)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsBestSeller)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producer.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AddedDate)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductQuantity)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBestSeller)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.ProductId }) |
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.ProductId }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.ProductId })
+            </td>
+        </tr>
+    }
+
+</table>

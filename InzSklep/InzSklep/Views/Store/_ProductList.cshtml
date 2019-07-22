@@ -1,0 +1,116 @@
+﻿@model IEnumerable<InzSklep.Models.Product>
+@using InzSklep.Infrastructure
+
+
+<section>
+    <div class="card-deck">
+        @foreach (var item in Model)
+        {
+            <div class="row my-3">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-4 ">
+                            <a href="@Url.Action("Details","Store",new { id = item.ProductId })">
+                                <img class="img-fluid w-100" src="@Url.ProductIMGFolderPath(item.ProductFileName)" alt="@item.Name">
+                            </a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-block mt-3">
+                                <a class="card-link" href="@Url.Action("Details","Store",new { id = item.ProductId })">
+                                    <h5 class="card-title text-center">@item.Name</h5>
+                                </a>
+                                <div class="col-8">
+                                    <div class="card-text">
+                                        <p class="px-4">
+                                            @item.ShortDescription
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @if (item.IsBestSeller)
+                        {
+                            <div class="card-img-overlay card-img-overlay-list card-bestseller">
+                                <h5 class="card-title d-flex vertical-text">BestSeller!</h5>
+                            </div>
+                        }
+                    </div>
+                    <div class="card-footer w-100 card-footer-padding">
+                        <div class="row w-100" style="margin:0;">
+                            <div class="col-md-10 ">
+                                <div class="row h-100 card-footer-center text-center">
+                                    <div class="col-md-6">
+                                        <h5 class="">
+                                            Cena:
+                                            @string.Format("{0:0.##}", item.Price)<span> PLN</span>
+                                        </h5>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="">
+                                            Dostępność:
+                                            @item.ProductQuantity
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 card-footer-button">
+                                <a href="@Url.Action("AddToCart","Cart",new { id = item.ProductId })" class="btn btn-danger" role="button" aria-pressed="true">
+                                    <i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+
+
+
+
+
+@*<section>
+        <div class="row">
+            <div class="card-deck">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3 d-flex p-2">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="card-title text-center">
+                                    <a class="card-link" href="@Url.Action("Details","Store",new { id = item.ProductId })">
+                                        <h5>@item.Name</h5>
+                                    </a>
+                                </div>
+                            </div>
+                            <a href="@Url.Action("Details","Store",new { id = item.ProductId })">
+                                <img class="img-fluid" src="@Url.ProductIMGFolderPath(item.ProductFileName)" alt="@item.Name">
+                            </a>
+
+                            @if (item.IsBestSeller)
+                            {
+                                <div class="card-img-overlay card-bestseller">
+                                    <h5 class="vertical-text card-title d-flex">BestSeller!</h5>
+                                </div>
+                            }
+
+
+
+
+
+
+                            <div class="card-block">
+                                <h5 class="card-text text-center"> @string.Format("{0:0.##}", item.Price)<span> PLN</span> </h5>
+                            </div>
+                            <a href="@Url.Action("AddToCart","Cart",new { id = item.ProductId })" class="btn btn-outline-danger  btn-block" role="button" aria-pressed="true">
+                                <i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </section>*@

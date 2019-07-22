@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = ViewBag.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p class="display-4 text-center">@ViewBag.Title</p>
+<hr />
+<div class="row">
+
+    <div class="col-md-3">
+        @Html.Partial("_ProfileMenu")
+    </div>
+    <div class="col-md-9">
+        @RenderBody()
+    </div>
+</div>
+
+@RenderSection("scripts", required: false)
+
+
+

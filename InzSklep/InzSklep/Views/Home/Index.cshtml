@@ -1,0 +1,167 @@
+﻿@model InzSklep.ViewModel.HomeViewModel
+
+@using InzSklep.Infrastructure
+
+@{
+    ViewBag.Title = "SupleSklep";
+}
+
+
+<section>
+    <div class="container slider-container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                @for (int i = 0; i < Model.OfferSlider.Count(); i++)
+            {
+                    <li data-target="#carouselExampleIndicators" data-slide-to="@i" @if (i == 0) {  <text> class="active" </text>          }></li>
+                }
+
+            </ol>
+            <div class="carousel-inner" role="listbox">
+
+                @for (int i = 0; i < Model.OfferSlider.Count(); i++)
+            {
+                    <div class="slider-hot carousel-item @if(i == 0){  <text> active </text> }">
+                        <a href="@Url.Action("Hot","Store",new { id = Model.OfferSlider[i].HotOfferId })">
+                            <img class="d-block img-fluid " src="@Url.SliderIMGFolderPath(Model.OfferSlider[i].OfferIMGFile)" alt="@Model.OfferSlider[i].Title">
+                        </a>
+
+                    </div>
+                }
+
+            </div>
+            <a class="carousel-control-prev myClickDisabledElm" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="fa fa-chevron-circle-left fa-3x fa-size slider-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next myClickDisabledElm" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="fa fa-chevron-circle-right fa-3x fa-size slider-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+
+    <section>
+        <p class="display-4 text-center my-5">BESTSELLERY</p>
+        <div class="row">
+            <div class="card-deck">
+                @foreach (var bestseller in Model.BestSeller)
+            {
+                    <div class="col-md-3 d-flex p-2">
+                        <div class="card">
+
+                            <a href="@Url.Action("Details","Store",new { id = bestseller.ProductId })">
+                                <img class="card-img-bottom img-fluid" src="@Url.ProductIMGFolderPath(bestseller.ProductFileName)" alt="@bestseller.Name">
+                            </a>
+
+                            <div class="card-block">
+                                <div class="card-title text-center">
+                                    <a class="card-link" href="@Url.Action("Details","Store",new { id = bestseller.ProductId })">
+                                        <h5 class="text-truncate card-text text-center pt-4 pb-2 px-4" data-toggle="tooltip" data-placement="top" title="@bestseller.Name">@bestseller.Name</h5>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="card-block">
+                                <h5 class="card-text text-center pt-2 pb-4 "> @string.Format("{0:0.##}", bestseller.Price)<span> PLN</span> </h5>
+                            </div>
+                            <div class="card-block">
+                                <a href="@Url.Action("AddToCart","Cart",new { id = bestseller.ProductId })" class="btn btn-outline-danger btn-block buttonBorder" role="button" aria-pressed="true">
+                                    <i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i>
+                                </a>
+                            </div>
+
+                            <div class="card-img-overlay card-img-overlay-home card-bestseller rounded">
+
+                                <h5 class="vertical-text card-title d-flex">BestSeller!</h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <p class="display-4 text-center my-5">NOWOŚCI</p>
+        <div class="row">
+
+            <div class="card-deck">
+
+
+                @foreach (var newest in Model.Newest)
+            {
+                    <div class="col-md-3 d-flex p-2">
+                        <div class="card">
+
+                            <div class="card-block">
+                                <a href="@Url.Action("Details","Store",new { id = newest.ProductId })">
+                                    <img class="card-img-bottom img-fluid" src="@Url.ProductIMGFolderPath(newest.ProductFileName)" alt="@newest.Name">
+                                </a>
+                            </div>
+                            <div class="card-img-overlay card-img-overlay-home card-newArrival">
+
+                                <h5 class="vertical-text card-title d-flex">Nowości!</h5>
+                            </div>
+                            <div class="card-block">
+                                <div class="card-title text-center">
+                                    <a class="card-link" href="@Url.Action("Details","Store",new { id = newest.ProductId })">
+                                        <h5 class="text-truncate card-text text-center pt-4 pb-2 px-4" data-toggle="tooltip" data-placement="top" title="@newest.Name">@newest.Name</h5>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="card-block">
+                                <h5 class="card-text text-center pt-2 pb-4 "> @string.Format("{0:0.##}", newest.Price)<span> PLN</span> </h5>
+                            </div>
+                            <a href="@Url.Action("AddToCart","Cart",new { id = newest.ProductId })" class="btn btn-outline-danger  btn-block buttonBorder" role="button" aria-pressed="true">
+                                <i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <section>
+
+        <p class="display-4 text-center my-5">OPINIE KLIENTÓW</p>
+
+        <div class="row">
+            <div class="col-md-2 col-0"></div>
+            <div class="col-md-2 col-4">
+                <img src="~/Content/Images/MarcinPhoto.jpg" alt="img" class="rounded-circle img-fluid" />
+            </div>
+
+            <div class="col-md-6 col-8 text-center pt-3">
+                <h4>Marcin:</h4>
+                <p>Najlpeszy sklep z suplementami jaki znam. Bardzo szybka wysyłka i możliwość płatności online. Polecam 10/10</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-12"></div>
+            <div class="col-md-6 col-8 text-center pt-3">
+                <h4>Martut:</h4>
+                <p>Najlpeszy sklep z suplementami jaki znam. Bardzo szybka wysyłka i możliwość płatności online. Polecam 10/10</p>
+            </div>
+            <div class="col-md-2 col-4">
+                <img src="~/Content/Images/MarcinPhoto2.jpg" alt="img" class="rounded-circle img-fluid" />
+            </div>
+        </div>
+
+    </section>
+</div>
+
+
+@section scripts{
+
+    <script>
+        //$('.myClickDisabledElm').bind('click', function (e) {
+        //    e.preventDefault();
+        //})
+    </script>
+}

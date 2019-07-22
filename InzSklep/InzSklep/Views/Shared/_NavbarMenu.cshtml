@@ -1,0 +1,45 @@
+﻿@model InzSklep.ViewModel.HomeViewModel
+@using InzSklep.Infrastructure
+
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" target="_self" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Produkty
+    </a>
+    <div class="dropdown-menu">
+        
+        @foreach (var item in Model.Categories)
+        {
+            <a class="dropdown-item" @*style="background: no-repeat ; background-image: url(@Url.CategoryIconsPath(item.CatIconFileName));"*@
+               href="@Url.Action("List","Store", new { categoryname = item.Name.ToLower() } )">
+                <b>@item.Name</b>
+            </a>
+            if(item != Model.Categories.Last())
+            {
+                <div class="dropdown-divider"></div>
+            }
+
+        }
+    </div>
+</li>
+
+@*<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Producenci
+    </a>
+    <div class="dropdown-menu">
+        @foreach (var item in Model.Producers)
+        {
+            <a class="dropdown-item" 
+               href="@Url.Action("List","Store", new { producername = item.Name.ToLower() } )">
+                <b>@item.Name</b>
+            </a>
+            if (item != Model.Producers.Last())
+            {
+                <div class="dropdown-divider"></div>
+            }
+            
+        }
+    </div>
+</li>*@
+

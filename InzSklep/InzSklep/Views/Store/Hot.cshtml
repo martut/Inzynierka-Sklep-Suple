@@ -1,0 +1,21 @@
+﻿@model InzSklep.Models.HotOffer
+@using InzSklep.Infrastructure
+
+@{
+
+    ViewBag.Title = Model.Title;
+}
+
+    <div class="mb-5">
+        <p class="display-4 text-center">@ViewBag.Title</p>
+        <hr />
+
+        <img class="d-block img-fluid "  src="@Url.SliderIMGFolderPath(Model.OfferIMGFile)" alt="@Model.Title">
+
+
+        <p class="display-4 text-center">Opis</p>
+        <p>
+            @Html.DisplayFor(model => model.Description)
+        </p>
+    </div>
+
